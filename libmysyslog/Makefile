@@ -1,23 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -g -fPIC
-LDFLAGS =
+CFLAGS = -Wall -Wextra -fPIC
+LDFLAGS = -shared
+TARGET = libmysyslog.so
 
-LIBRARY = libmysyslog.a
-OBJ = src/mysyslog.o
+all: $(TARGET)
 
-all: $(LIBRARY)
+$(TARGET): libmysyslog.o
+	$(CC) $(LDFLAGS) -o $@ $^
 
-$(LIBRARY): $(OBJ)
-	ar rcs $@ $^
+libmysyslog.o: libmysyslog.c libmysyslog.h
+	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f $(OBJ) $(LIBRARY)
+	rm -f *.o $(TARGET)
 
-deb:
-	# Deb package building logic
-
-install: $(LIBRARY)
-	cp $(LIBRARY) /usr/local/lib
-	ldconfig
-
-.PHONY: all clean deb install
+.PHONY: all clean
