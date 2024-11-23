@@ -1,0 +1,12 @@
+Source: libmysyslog
+Section: libs
+Priority: optional
+Maintainer: GandC Snow admin@gandc.ru
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://git.gandc.ru/mysyslog/libmysyslog
+
+Package: libmysyslog
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Core library for the MySyslog logging system
