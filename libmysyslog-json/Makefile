@@ -1,23 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -g -fPIC
-LDFLAGS =
+CFLAGS = -Wall -Wextra -fPIC
+LDFLAGS = -shared
+TARGET = libmysyslog-json.so
 
-LIBRARY = libmysyslog-json.a
-OBJ = src/log_json.o
+all: $(TARGET)
 
-all: $(LIBRARY)
+$(TARGET): libmysyslog-json.o
+	$(CC) $(LDFLAGS) -o $@ $^
 
-$(LIBRARY): $(OBJ)
-	ar rcs $@ $^
+libmysyslog-json.o: libmysyslog-json.c libmysyslog-json.h
+	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f $(OBJ) $(LIBRARY)
+	rm -f *.o $(TARGET)
 
-deb:
-	# Deb package building logic
-
-install: $(LIBRARY)
-	cp $(LIBRARY) /usr/local/lib
-	ldconfig
-
-.PHONY: all clean deb install
+.PHONY: all clean
