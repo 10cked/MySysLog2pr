@@ -1,18 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -g
-LDFLAGS = -lm
+CFLAGS = -Wall -Wextra -I../libmysyslog
+LDFLAGS = -L../libmysyslog -lmysyslog
+TARGET = libmysyslog-client
 
-LIBS = -lmysyslog -lmysyslog-text -lmysyslog-json
+all: $(TARGET)
 
-all: mysyslog-client
+$(TARGET): libmysyslog-client.o
+        $(CC) -o $(TARGET) libmysyslog-client.o $(LDFLAGS)
 
-mysyslog-client: src/mysyslog-client.o
-	$(CC) -o $@ $^ $(LIBS)
+libmysyslog.o: libmysyslog-client.c
+        $(cc) $(CFLAGS) -c libmysyslog-client.c
 
 clean:
-	rm -f src/*.o mysyslog-client
+        rm -f $(TARGET) *.o
 
-deb:
-	# Deb package building logic
-
-.PHONY: all clean deb
+.PHONY: all clean
