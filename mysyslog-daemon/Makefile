@@ -1,16 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -g
-LDFLAGS = -lm
+CFLAGS = -Wall -Wextra -I../libmysyslog
+LDFLAGS = -L../libmysyslog -lmysyslog
+TARGET = libmysyslog-daemon
 
-LIBS = -lmysyslog -lmysyslog-text -lmysyslog-json
+all: $(TARGET)
 
-all: mysyslog-daemon
+$(TARGET): libmysyslog-daemon.o
+	$(CC) -o $(TARGET) libmysyslog-daemon.o $(LDFLAGS)
 
-mysyslog-daemon: src/mysyslog-daemon.o
-$(CC) -o $@ $^ $(LIBS)
+libmysyslog-daemon.o: libmysyslog-daemon.c
+	$(CC) $(CFLAGS) -c libmysyslog-daemon.c
 
-clean: rm -f src/*.o mysyslog-daemon
+clean:
+	rm -f $(TARGET) *.o
 
-deb: # Deb package building logic
-
-.PHONY: all clean deb
+.PHONY: all clean
