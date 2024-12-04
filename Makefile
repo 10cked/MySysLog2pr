@@ -34,8 +34,8 @@ build_lib:
 
 # Сборка клиентского приложения и демона
 build_apps:
-	@cc $(CLIENT_SOURCE) -o log_client -L$(LIB_DIR) -lmysyslog
-	@cc $(DAEMON_SOURCE) -o log_daemon -L$(LIB_DIR) -lmysyslog
+	@cc $(INCLUDE_DIRS) $(CLIENT_SOURCE) -o log_client -L$(LIB_DIR) -lmysyslog
+	@cc $(INCLUDE_DIRS) $(DAEMON_SOURCE) -o log_daemon -L$(LIB_DIR) -lmysyslog
 
 # Генерация systemd unit-файла
 systemd_unit_file:
