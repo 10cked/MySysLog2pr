@@ -104,7 +104,7 @@ deb_lib:
 astra_repo:
 	@mkdir -p /usr/local/repos
 	@cp *.deb /usr/local/repos
-	@dpkg-scanpackages /usr/local/repos /dev/null | gzip -9c > /usr/local/repos/Packages.gz
+	@cd /usr/local/repos && dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
 	@echo "deb [trusted=yes] file:/usr/local/repos ./" > /etc/apt/sources.list.d/mysyslog.list
 	@sudo apt-get update
 
