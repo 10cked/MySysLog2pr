@@ -11,6 +11,9 @@ TEXT_SOURCE = $(TEXT_DIR)/libmysyslog-text.c
 CLIENT_SOURCE = $(CLIENT_DIR)/libmysyslog-client.c
 DAEMON_SOURCE = $(DAEMON_DIR)/libmysyslog-daemon.c
 
+# Пути для заголовочных файлов
+INCLUDE_DIRS = -I$(LIB_DIR) -I$(JSON_DIR) -I$(TEXT_DIR)
+
 # Пути для unit-файла systemd и переменные пакетов
 UNIT_FILE = /etc/systemd/system/libmysyslog-daemon.service
 
