@@ -6,5 +6,5 @@
 Пример:
 ```
 /usr/local/bin/log_client -m "Hello, World!" -l 1 -d 0 -f 0 -p "log.txt"
-
+```
 
