@@ -45,7 +45,7 @@ systemd_unit_file:
 	@echo "Description=Daemon for logging with libmysyslog" >> $(UNIT_FILE)
 	@echo "[Service]"                            >> $(UNIT_FILE)
 	@echo "ExecStart=/usr/local/bin/log_daemon"  >> $(UNIT_FILE)
-	@echo "Type=forking"                         >> $(UNIT_FILE)
+	@echo "Type=simple"                         >> $(UNIT_FILE)
 	@echo "PIDFile=/run/libmysyslog-daemon.pid"  >> $(UNIT_FILE)
 	@echo "[Install]"                            >> $(UNIT_FILE)
 	@echo "WantedBy=multi-user.target"           >> $(UNIT_FILE)
